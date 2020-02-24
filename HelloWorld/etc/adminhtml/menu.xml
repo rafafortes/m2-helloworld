@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Rafaf. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Rafaf_HelloWorld::helloworld" title="Hello World" module="Rafaf_HelloWorld" sortOrder="51" resource="Rafaf_HelloWorld::helloworld"/>
+        <add id="Rafaf_HelloWorld::post" title="Manage Posts" module="Rafaf_HelloWorld" sortOrder="10" action="rafaf_helloworld/post" resource="Rafaf_HelloWorld::post" parent="Rafaf_HelloWorld::helloworld"/>
+        <add id="Rafaf_HelloWorld::hello_configuration" title="Configuration" module="Rafaf_HelloWorld" sortOrder="99" parent="Rafaf_HelloWorld::helloworld" action="adminhtml/system_config/edit/section/helloworld" resource="Rafaf_HelloWorld::helloworld_configuration"/>
+    </menu>
+</config>
+
