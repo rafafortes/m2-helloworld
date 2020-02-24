@@ -16,11 +16,33 @@ use Rafaf\HelloWorld\Model\PostRepositoryFactory;
 
 class Save extends Action
 {
+    /**
+     * @var ScopeConfigInterface
+     */
     protected $scopeConfig;
+
+    /**
+     * @var PostRepositoryFactory
+     */
     protected $postRepositoryFactory;
+
+    /**
+     * @var PostFactory
+     */
     protected $postFactory;
+
+    /**
+     * @var
+     */
     protected $searchCriteriaFactory;
 
+    /**
+     * Save constructor.
+     * @param Context $context
+     * @param ScopeConfigInterface $scopeConfig
+     * @param PostFactory $postFactory
+     * @param PostRepositoryFactory $postRepositoryFactory
+     */
     public function __construct(
         Context $context,
         ScopeConfigInterface $scopeConfig,
@@ -73,15 +95,12 @@ class Save extends Action
                 }
 
                 return $resultRedirect->setPath('*/*/');
-
             } catch (Exception $e) {
                 $this->messageManager->addExceptionMessage($e,
                     __('Something went wrong while saving the post.' . $e->getMessage()));
             }
-
             return $resultRedirect->setPath('*/*/edit', ['entity_id' => $this->getRequest()->getParam('entity_id')]);
         }
-
         return $resultRedirect;
     }
 }

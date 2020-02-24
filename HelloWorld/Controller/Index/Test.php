@@ -12,8 +12,16 @@ use Magento\Framework\View\Result\PageFactory;
 
 class Test extends Action
 {
+    /**
+     * @var PageFactory
+     */
     protected $_pageFactory;
 
+    /**
+     * Test constructor.
+     * @param Context $context
+     * @param PageFactory $pageFactory
+     */
     public function __construct(
         Context $context,
         PageFactory $pageFactory)
@@ -22,6 +30,9 @@ class Test extends Action
         return parent::__construct($context);
     }
 
+    /**
+     * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface|void
+     */
     public function execute()
     {
         $this->_redirect('*/*/index');

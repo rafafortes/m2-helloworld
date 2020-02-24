@@ -12,10 +12,31 @@ use Rafaf\HelloWorld\Model\ResourceModel\Post\CollectionFactory;
 
 class DataProvider extends AbstractDataProvider
 {
+    /**
+     * @var \Rafaf\HelloWorld\Model\ResourceModel\Post\Collection
+     */
     protected $collection;
+
+    /**
+     * @var StoreManagerInterface
+     */
     protected $storeManager;
+
+    /**
+     * @var
+     */
     protected $loadedData;
 
+    /**
+     * DataProvider constructor.
+     * @param $name
+     * @param $primaryFieldName
+     * @param $requestFieldName
+     * @param CollectionFactory $postCollectionFactory
+     * @param StoreManagerInterface $storeManager
+     * @param array $meta
+     * @param array $data
+     */
     public function __construct(
         $name,
         $primaryFieldName,

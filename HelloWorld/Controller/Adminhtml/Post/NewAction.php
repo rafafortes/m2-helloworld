@@ -13,8 +13,16 @@ use Magento\Framework\Controller\ResultInterface;
 
 class NewAction extends Action
 {
+    /**
+     * @var ForwardFactory
+     */
     protected $resultForwardFactory;
 
+    /**
+     * NewAction constructor.
+     * @param Context $context
+     * @param ForwardFactory $resultForwardFactory
+     */
     public function __construct(
         Context $context,
         ForwardFactory $resultForwardFactory

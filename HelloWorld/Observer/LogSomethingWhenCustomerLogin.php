@@ -12,14 +12,25 @@ use Psr\Log\LoggerInterface;
 
 class LogSomethingWhenCustomerLogin implements ObserverInterface
 {
+    /**
+     * @var LoggerInterface
+     */
     protected $logger;
 
+    /**
+     * LogSomethingWhenCustomerLogin constructor.
+     * @param LoggerInterface $logger
+     */
     public function __construct(
         LoggerInterface $logger
      ) {
         $this->logger = $logger;
     }
 
+    /**
+     * @param Observer $observer
+     * @return $this|void
+     */
     public function execute(Observer $observer)
     {
         $this->logger->info("Customer Login!");

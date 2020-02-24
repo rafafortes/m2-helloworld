@@ -12,6 +12,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class Sayhello extends Command
 {
+    /**
+     * Configure command.
+     *
+     * @return void
+     */
     protected function configure()
     {
         $this->setName('example:sayhello');
@@ -19,6 +24,12 @@ class Sayhello extends Command
 
         parent::configure();
     }
+
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return int|void|null
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $output->writeln("Hello World!");

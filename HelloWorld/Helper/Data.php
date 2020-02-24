@@ -12,8 +12,15 @@ use Magento\Store\Model\ScopeInterface;
 
 class Data extends AbstractHelper
 {
+    /**
+     * XML Path to HelloWorld
+     */
     const XML_PATH_HELLOWORLD = 'helloworld/';
 
+    /**
+     * Data constructor.
+     * @param Context $context
+     */
     public function __construct(
         Context $context)
     {
@@ -21,6 +28,11 @@ class Data extends AbstractHelper
         parent::__construct($context);
     }
 
+    /**
+     * @param $field
+     * @param null $storeId
+     * @return mixed
+     */
     public function getConfigValue($field, $storeId = null)
     {
         return $this->scopeConfig->getValue(
@@ -28,6 +40,11 @@ class Data extends AbstractHelper
         );
     }
 
+    /**
+     * @param $code
+     * @param null $storeId
+     * @return mixed
+     */
     public function getGeneralConfig($code, $storeId = null)
     {
         return $this->getConfigValue(self::XML_PATH_HELLOWORLD .'general/'. $code, $storeId);

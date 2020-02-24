@@ -16,10 +16,28 @@ use Rafaf\HelloWorld\Model\PostRepositoryFactory;
 
 class Edit extends Action
 {
+    /**
+     * @var PageFactory
+     */
     protected $resultPageFactory;
+
+    /**
+     * @var PostRepositoryFactory
+     */
     protected $postRepositoryFactory;
+
+    /**
+     * @var Registry
+     */
     protected $registry;
 
+    /**
+     * Edit constructor.
+     * @param Action\Context $context
+     * @param PageFactory $resultPageFactory
+     * @param PostRepositoryFactory $postRepositoryFactory
+     * @param Registry $registry
+     */
     public function __construct(
         Action\Context $context,
         PageFactory $resultPageFactory,
@@ -49,7 +67,6 @@ class Edit extends Action
     protected function init($post)
     {
         $resultPage = $this->resultPageFactory->create();
-
         $resultPage->getConfig()->getTitle()->prepend(__('Post'));
 
         if (method_exists($post, 'getId')) {
@@ -60,7 +77,6 @@ class Edit extends Action
         } else {
             $resultPage->getConfig()->getTitle()->prepend(__('New Post'));
         }
-
         $resultPage->setActiveMenu('Rafaf_HelloWorld::post')
             ->addBreadcrumb(__('Post'), __('Post'))
             ->addBreadcrumb(__('Manage Post'), __('Manage Post'));
@@ -85,12 +101,10 @@ class Edit extends Action
             }
 
             $this->registry->register('current_post', $post);
-
             $resultPage = $this->init($post);
         } catch (Exception $e) {
             $this->messageManager->addExceptionMessage($e, __('Something went wrong: ' . $e->getMessage()));
         }
-
         return $resultPage;
     }
 }

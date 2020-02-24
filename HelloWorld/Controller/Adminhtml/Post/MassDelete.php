@@ -18,10 +18,28 @@ use Rafaf\HelloWorld\Model\ResourceModel\Post\CollectionFactory;
 
 class MassDelete extends Action
 {
+    /**
+     * @var Filter
+     */
     protected $filter;
+
+    /**
+     * @var CollectionFactory
+     */
     protected $collectionFactory;
+
+    /**
+     * @var PostRepositoryFactory
+     */
     protected $postRepositoryFactory;
 
+    /**
+     * MassDelete constructor.
+     * @param Context $context
+     * @param Filter $filter
+     * @param CollectionFactory $collectionFactory
+     * @param PostRepositoryFactory $postRepositoryFactory
+     */
     public function __construct(
         Context $context,
         Filter $filter,
@@ -53,8 +71,7 @@ class MassDelete extends Action
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
 
         try {
-            $collection = $this->filter->getCollection($this->collectionFactory->create());
-
+            $collection     = $this->filter->getCollection($this->collectionFactory->create());
             $collectionSize = $collection->getSize();
 
             foreach ($collection as $post) {
@@ -62,11 +79,9 @@ class MassDelete extends Action
             }
 
             $this->messageManager->addSuccessMessage(__('A total of %1 record(s) have been deleted.', $collectionSize));
-
         } catch (Exception $e) {
             $this->messageManager->addErrorMessage(__('Something wrong deleting items'));
         }
-
         return $resultRedirect->setPath('*/*/');
     }
 }

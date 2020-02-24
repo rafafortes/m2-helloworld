@@ -12,10 +12,21 @@ use Rafaf\HelloWorld\Helper\Data;
 
 class Index extends Template
 {
+    /**
+     *  Disabled message
+     */
     const DISABLED_MSG = 'The module is disabled, sorry about that =/';
 
+    /**
+     * @var Data
+     */
     protected $helper;
 
+    /**
+     * Index constructor.
+     * @param Context $context
+     * @param Data $helper
+     */
     public function __construct(
         Context $context,
         Data $helper)
@@ -24,6 +35,9 @@ class Index extends Template
         return parent::__construct($context);
     }
 
+    /**
+     * @return mixed|string
+     */
     public function getDisplayText()
     {
         if($this->helper->getGeneralConfig('enable'))

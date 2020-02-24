@@ -13,8 +13,17 @@ use Rafaf\HelloWorld\Model\PostRepositoryFactory;
 
 class Delete extends Action
 {
+
+    /**
+     * @var PostRepositoryFactory
+     */
     protected $postRepositoryFactory;
 
+    /**
+     * Delete constructor.
+     * @param Action\Context $context
+     * @param PostRepositoryFactory $postRepositoryFactory
+     */
     public function __construct(
         Action\Context $context,
         PostRepositoryFactory $postRepositoryFactory
@@ -39,27 +48,21 @@ class Delete extends Action
     public function execute()
     {
         $id = $this->getRequest()->getParam('id');
-
         $resultRedirect = $this->resultRedirectFactory->create();
 
         if (!empty($id)) {
-
             try {
                 $post = $this->postRepositoryFactory->create()->getById($id);
-
                 $this->postRepositoryFactory->create()->delete($post);
-
                 $this->messageManager->addSuccessMessage(__('The post has been deleted.'));
 
                 return $resultRedirect->setPath('*/*/');
-
             } catch (Exception $e) {
                 $this->messageManager->addErrorMessage($e->getMessage());
 
                 return $resultRedirect->setPath('*/*/edit', ['id' => $id]);
             }
         }
-
         $this->messageManager->addErrorMessage(__('We can\'t find a post to delete.'));
 
         return $resultRedirect->setPath('*/*/');

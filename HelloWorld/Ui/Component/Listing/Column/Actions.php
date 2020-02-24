@@ -13,12 +13,29 @@ use Magento\Ui\Component\Listing\Columns\Column;
 
 class Actions extends Column
 {
+    /**
+     * URL path to edit
+     */
     const URL_PATH_EDIT = 'rafaf_helloworld/post/edit';
 
+    /**
+     * URL path to delete
+     */
     const URL_PATH_DELETE = 'rafaf_helloworld/post/delete';
 
+    /**
+     * @var UrlInterface
+     */
     protected $urlBuilder;
 
+    /**
+     * Actions constructor.
+     * @param ContextInterface $context
+     * @param UiComponentFactory $uiComponentFactory
+     * @param UrlInterface $urlBuilder
+     * @param array $components
+     * @param array $data
+     */
     public function __construct(
         ContextInterface $context,
         UiComponentFactory $uiComponentFactory,
@@ -39,13 +56,10 @@ class Actions extends Column
     public function prepareDataSource(array $dataSource)
     {
         if (isset($dataSource['data']['items'])) {
-
             foreach ($dataSource['data']['items'] as & $item) {
-
                 $name = $this->getData('name');
 
                 if (isset($item['id'])) {
-
                     $item[$name]['edit'] = [
                         'href' => $this->urlBuilder->getUrl(self::URL_PATH_EDIT, ['id' => $item['id']]),
                         'label' => __('Edit')
@@ -61,11 +75,8 @@ class Actions extends Column
                         ]
                     ];
                 }
-
             }
-
         }
-
         return $dataSource;
     }
 }

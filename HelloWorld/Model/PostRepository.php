@@ -33,6 +33,12 @@ class PostRepository implements PostRepositoryInterface
      */
     private $searchResultFactory;
 
+    /**
+     * PostRepository constructor.
+     * @param PostFactory $postFactory
+     * @param PostCollectionFactory $postCollectionFactory
+     * @param PostSearchResultInterfaceFactory $postSearchResultInterfaceFactory
+     */
     public function __construct(
         PostFactory $postFactory,
         PostCollectionFactory $postCollectionFactory,
@@ -43,6 +49,11 @@ class PostRepository implements PostRepositoryInterface
         $this->searchResultFactory = $postSearchResultInterfaceFactory;
     }
 
+    /**
+     * @param int $id
+     * @return PostInterface|Post
+     * @throws NoSuchEntityException
+     */
     public function getById($id)
     {
         $post = $this->postFactory->create();
@@ -53,17 +64,28 @@ class PostRepository implements PostRepositoryInterface
         return $post;
     }
 
+    /**
+     * @param PostInterface $post
+     * @return PostInterface
+     */
     public function save(PostInterface $post)
     {
         $post->getResource()->save($post);
         return $post;
     }
 
+    /**
+     * @param PostInterface $post
+     */
     public function delete(PostInterface $post)
     {
         $post->getResource()->delete($post);
     }
 
+    /**
+     * @param SearchCriteriaInterface $searchCriteria
+     * @return PostSearchResultInterface
+     */
     public function getList(SearchCriteriaInterface $searchCriteria)
     {
         $collection = $this->postCollectionFactory->create();
@@ -77,6 +99,10 @@ class PostRepository implements PostRepositoryInterface
         return $this->buildSearchResult($searchCriteria, $collection);
     }
 
+    /**
+     * @param SearchCriteriaInterface $searchCriteria
+     * @param Collection $collection
+     */
     private function addFiltersToCollection(SearchCriteriaInterface $searchCriteria, Collection $collection)
     {
         foreach ($searchCriteria->getFilterGroups() as $filterGroup) {
@@ -89,6 +115,10 @@ class PostRepository implements PostRepositoryInterface
         }
     }
 
+    /**
+     * @param SearchCriteriaInterface $searchCriteria
+     * @param Collection $collection
+     */
     private function addSortOrdersToCollection(SearchCriteriaInterface $searchCriteria, Collection $collection)
     {
         foreach ((array) $searchCriteria->getSortOrders() as $sortOrder) {
@@ -97,12 +127,21 @@ class PostRepository implements PostRepositoryInterface
         }
     }
 
+    /**
+     * @param SearchCriteriaInterface $searchCriteria
+     * @param Collection $collection
+     */
     private function addPagingToCollection(SearchCriteriaInterface $searchCriteria, Collection $collection)
     {
         $collection->setPageSize($searchCriteria->getPageSize());
         $collection->setCurPage($searchCriteria->getCurrentPage());
     }
 
+    /**
+     * @param SearchCriteriaInterface $searchCriteria
+     * @param Collection $collection
+     * @return PostSearchResultInterface
+     */
     private function buildSearchResult(SearchCriteriaInterface $searchCriteria, Collection $collection)
     {
         $searchResults = $this->searchResultFactory->create();
