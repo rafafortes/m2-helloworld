@@ -6,9 +6,15 @@
 
 namespace Rafaf\HelloWorld\Controller\Adminhtml\Post;
 
+use Exception;
 use Magento\Backend\App\Action;
+use Magento\Framework\Controller\ResultInterface;
+use Magento\Framework\Registry;
+use Magento\Framework\View\Result\Page;
+use Magento\Framework\View\Result\PageFactory;
+use Rafaf\HelloWorld\Model\PostRepositoryFactory;
 
-class Edit extends \Magento\Backend\App\Action
+class Edit extends Action
 {
     protected $resultPageFactory;
     protected $postRepositoryFactory;
@@ -16,9 +22,9 @@ class Edit extends \Magento\Backend\App\Action
 
     public function __construct(
         Action\Context $context,
-        \Magento\Framework\View\Result\PageFactory $resultPageFactory,
-        \Rafaf\HelloWorld\Model\PostRepositoryFactory $postRepositoryFactory,
-        \Magento\Framework\Registry $registry
+        PageFactory $resultPageFactory,
+        PostRepositoryFactory $postRepositoryFactory,
+        Registry $registry
     ) {
         parent::__construct($context);
         $this->resultPageFactory = $resultPageFactory;
@@ -38,7 +44,7 @@ class Edit extends \Magento\Backend\App\Action
      * Initialize page
      *
      * @param $post
-     * @return \Magento\Framework\View\Result\Page
+     * @return Page
      */
     protected function init($post)
     {
@@ -65,7 +71,7 @@ class Edit extends \Magento\Backend\App\Action
     /**
      * Edit action
      *
-     * @return \Magento\Framework\Controller\ResultInterface
+     * @return ResultInterface
      */
     public function execute()
     {
@@ -81,7 +87,7 @@ class Edit extends \Magento\Backend\App\Action
             $this->registry->register('current_post', $post);
 
             $resultPage = $this->init($post);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->messageManager->addExceptionMessage($e, __('Something went wrong: ' . $e->getMessage()));
         }
 

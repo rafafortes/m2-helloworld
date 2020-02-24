@@ -6,16 +6,18 @@
 
 namespace Rafaf\HelloWorld\Plugin;
 
+use Rafaf\HelloWorld\Model\Post;
+
 class ExamplePlugin
 {
-    public function beforeSetName(\Rafaf\HelloWorld\Model\Post $subject, $name)
+    public function beforeSetName(Post $subject, $name)
     {
         $name = "Something before the name: ". $name;
 
         return [$name];
     }
 
-    public function afterGetName(\Rafaf\HelloWorld\Model\Post $subject, $result)
+    public function afterGetName(Post $subject, $result)
     {
         return $result . ": Something after the name";
     }

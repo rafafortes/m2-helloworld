@@ -6,13 +6,18 @@
 
 namespace Rafaf\Helloworld\Controller\Adminhtml\Post;
 
-class NewAction extends \Magento\Backend\App\Action
+use Magento\Backend\App\Action;
+use Magento\Backend\App\Action\Context;
+use Magento\Backend\Model\View\Result\ForwardFactory;
+use Magento\Framework\Controller\ResultInterface;
+
+class NewAction extends Action
 {
     protected $resultForwardFactory;
 
     public function __construct(
-        \Magento\Backend\App\Action\Context $context,
-        \Magento\Backend\Model\View\Result\ForwardFactory $resultForwardFactory
+        Context $context,
+        ForwardFactory $resultForwardFactory
     ) {
         $this->resultForwardFactory = $resultForwardFactory;
         parent::__construct($context);
@@ -29,7 +34,7 @@ class NewAction extends \Magento\Backend\App\Action
     /**
      * Forward to edit action
      *
-     * @return \Magento\Framework\Controller\ResultInterface
+     * @return ResultInterface
      */
     public function execute()
     {

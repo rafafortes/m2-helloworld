@@ -6,6 +6,9 @@
 
 namespace Rafaf\HelloWorld\Ui\Component\Listing\Column;
 
+use Magento\Framework\UrlInterface;
+use Magento\Framework\View\Element\UiComponent\ContextInterface;
+use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Ui\Component\Listing\Columns\Column;
 
 class Actions extends Column
@@ -17,9 +20,9 @@ class Actions extends Column
     protected $urlBuilder;
 
     public function __construct(
-        \Magento\Framework\View\Element\UiComponent\ContextInterface $context,
-        \Magento\Framework\View\Element\UiComponentFactory $uiComponentFactory,
-        \Magento\Framework\UrlInterface $urlBuilder,
+        ContextInterface $context,
+        UiComponentFactory $uiComponentFactory,
+        UrlInterface $urlBuilder,
         array $components = [],
         array $data = []
     ) {

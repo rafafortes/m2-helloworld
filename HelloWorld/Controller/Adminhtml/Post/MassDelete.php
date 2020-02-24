@@ -6,19 +6,27 @@
 
 namespace Rafaf\HelloWorld\Controller\Adminhtml\Post;
 
+use Exception;
+use Magento\Backend\App\Action;
+use Magento\Backend\App\Action\Context;
+use Magento\Backend\Model\View\Result\Redirect;
 use Magento\Framework\Controller\ResultFactory;
+use Magento\Framework\Exception\LocalizedException;
+use Magento\Ui\Component\MassAction\Filter;
+use Rafaf\HelloWorld\Model\PostRepositoryFactory;
+use Rafaf\HelloWorld\Model\ResourceModel\Post\CollectionFactory;
 
-class MassDelete extends \Magento\Backend\App\Action
+class MassDelete extends Action
 {
     protected $filter;
     protected $collectionFactory;
     protected $postRepositoryFactory;
 
     public function __construct(
-        \Magento\Backend\App\Action\Context $context,
-        \Magento\Ui\Component\MassAction\Filter $filter,
-        \Rafaf\HelloWorld\Model\ResourceModel\Post\CollectionFactory $collectionFactory,
-        \Rafaf\HelloWorld\Model\PostRepositoryFactory $postRepositoryFactory
+        Context $context,
+        Filter $filter,
+        CollectionFactory $collectionFactory,
+        PostRepositoryFactory $postRepositoryFactory
     ) {
         $this->filter = $filter;
         $this->collectionFactory = $collectionFactory;
@@ -37,8 +45,8 @@ class MassDelete extends \Magento\Backend\App\Action
     /**
      * Mass delete action
      *
-     * @return \Magento\Backend\Model\View\Result\Redirect
-     * @throws \Magento\Framework\Exception\LocalizedException|\Exception
+     * @return Redirect
+     * @throws LocalizedException|Exception
      */
     public function execute()
     {
@@ -55,7 +63,7 @@ class MassDelete extends \Magento\Backend\App\Action
 
             $this->messageManager->addSuccessMessage(__('A total of %1 record(s) have been deleted.', $collectionSize));
 
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->messageManager->addErrorMessage(__('Something wrong deleting items'));
         }
 

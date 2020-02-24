@@ -6,7 +6,11 @@
 
 namespace Rafaf\HelloWorld\Model\Post;
 
-class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
+use Magento\Store\Model\StoreManagerInterface;
+use Magento\Ui\DataProvider\AbstractDataProvider;
+use Rafaf\HelloWorld\Model\ResourceModel\Post\CollectionFactory;
+
+class DataProvider extends AbstractDataProvider
 {
     protected $collection;
     protected $storeManager;
@@ -16,8 +20,8 @@ class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
         $name,
         $primaryFieldName,
         $requestFieldName,
-        \Rafaf\HelloWorld\Model\ResourceModel\Post\CollectionFactory $postCollectionFactory,
-        \Magento\Store\Model\StoreManagerInterface $storeManager,
+        CollectionFactory $postCollectionFactory,
+        StoreManagerInterface $storeManager,
         array $meta = [],
         array $data = []
     ) {

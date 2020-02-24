@@ -6,15 +6,19 @@
 
 namespace Rafaf\HelloWorld\Block;
 
-class Index extends \Magento\Framework\View\Element\Template
+use Magento\Framework\View\Element\Template;
+use Magento\Framework\View\Element\Template\Context;
+use Rafaf\HelloWorld\Helper\Data;
+
+class Index extends Template
 {
     const DISABLED_MSG = 'The module is disabled, sorry about that =/';
 
     protected $helper;
 
     public function __construct(
-        \Magento\Framework\View\Element\Template\Context $context,
-        \Rafaf\HelloWorld\Helper\Data $helper)
+        Context $context,
+        Data $helper)
     {
         $this->helper = $helper;
         return parent::__construct($context);

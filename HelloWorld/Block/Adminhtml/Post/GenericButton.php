@@ -6,14 +6,17 @@
 
 namespace Rafaf\HelloWorld\Block\Adminhtml\Post;
 
+use Magento\Backend\Block\Widget\Context;
+use Magento\Framework\Registry;
+
 class GenericButton
 {
     protected $context;
     protected $registry;
 
     public function __construct(
-        \Magento\Backend\Block\Widget\Context $context,
-        \Magento\Framework\Registry $registry
+        Context $context,
+        Registry $registry
     ) {
         $this->context = $context;
         $this->registry = $registry;

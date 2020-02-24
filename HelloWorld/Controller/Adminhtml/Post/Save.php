@@ -6,7 +6,15 @@
 
 namespace Rafaf\HelloWorld\Controller\Adminhtml\Post;
 
-class Save extends \Magento\Backend\App\Action
+use Exception;
+use Magento\Backend\App\Action;
+use Magento\Backend\App\Action\Context;
+use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Framework\Controller\ResultInterface;
+use Rafaf\HelloWorld\Model\PostFactory;
+use Rafaf\HelloWorld\Model\PostRepositoryFactory;
+
+class Save extends Action
 {
     protected $scopeConfig;
     protected $postRepositoryFactory;
@@ -14,10 +22,10 @@ class Save extends \Magento\Backend\App\Action
     protected $searchCriteriaFactory;
 
     public function __construct(
-        \Magento\Backend\App\Action\Context $context,
-        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
-        \Rafaf\HelloWorld\Model\PostFactory $postFactory,
-        \Rafaf\HelloWorld\Model\PostRepositoryFactory $postRepositoryFactory
+        Context $context,
+        ScopeConfigInterface $scopeConfig,
+        PostFactory $postFactory,
+        PostRepositoryFactory $postRepositoryFactory
     ) {
         parent::__construct($context);
         $this->scopeConfig = $scopeConfig;
@@ -36,7 +44,7 @@ class Save extends \Magento\Backend\App\Action
     /**
      * Save action
      *
-     * @return \Magento\Framework\Controller\ResultInterface
+     * @return ResultInterface
      */
     public function execute()
     {
@@ -66,7 +74,7 @@ class Save extends \Magento\Backend\App\Action
 
                 return $resultRedirect->setPath('*/*/');
 
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $this->messageManager->addExceptionMessage($e,
                     __('Something went wrong while saving the post.' . $e->getMessage()));
             }

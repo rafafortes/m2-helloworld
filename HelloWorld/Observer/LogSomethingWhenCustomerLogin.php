@@ -6,17 +6,21 @@
 
 namespace Rafaf\HelloWorld\Observer;
 
-class LogSomethingWhenCustomerLogin implements \Magento\Framework\Event\ObserverInterface
+use Magento\Framework\Event\Observer;
+use Magento\Framework\Event\ObserverInterface;
+use Psr\Log\LoggerInterface;
+
+class LogSomethingWhenCustomerLogin implements ObserverInterface
 {
     protected $logger;
 
     public function __construct(
-        \Psr\Log\LoggerInterface $logger
+        LoggerInterface $logger
      ) {
         $this->logger = $logger;
     }
 
-    public function execute(\Magento\Framework\Event\Observer $observer)
+    public function execute(Observer $observer)
     {
         $this->logger->info("Customer Login!");
 

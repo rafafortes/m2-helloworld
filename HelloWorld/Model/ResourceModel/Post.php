@@ -5,7 +5,9 @@
  */
 namespace Rafaf\HelloWorld\Model\ResourceModel;
 
-class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
+use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
+
+class Post extends AbstractDb
 {
     protected $_idFieldName = 'id';
 

@@ -5,15 +5,20 @@
  */
 namespace Rafaf\HelloWorld\Controller\Index;
 
-class Index extends \Magento\Framework\App\Action\Action
+use Magento\Framework\App\Action\Action;
+use Magento\Framework\App\Action\Context;
+use Magento\Framework\View\Result\PageFactory;
+use Rafaf\HelloWorld\Helper\Data;
+
+class Index extends Action
 {
     protected $_pageFactory;
     protected $helper;
 
     public function __construct(
-        \Magento\Framework\App\Action\Context $context,
-        \Magento\Framework\View\Result\PageFactory $pageFactory,
-        \Rafaf\HelloWorld\Helper\Data $helper)
+        Context $context,
+        PageFactory $pageFactory,
+        Data $helper)
     {
         $this->_pageFactory = $pageFactory;
         $this->helper       = $helper;

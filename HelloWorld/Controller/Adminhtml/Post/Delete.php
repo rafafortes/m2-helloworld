@@ -6,15 +6,18 @@
 
 namespace Rafaf\HelloWorld\Controller\Adminhtml\Post;
 
+use Exception;
 use Magento\Backend\App\Action;
+use Magento\Framework\Controller\Result\Redirect;
+use Rafaf\HelloWorld\Model\PostRepositoryFactory;
 
-class Delete extends \Magento\Backend\App\Action
+class Delete extends Action
 {
     protected $postRepositoryFactory;
 
     public function __construct(
         Action\Context $context,
-        \Rafaf\HelloWorld\Model\PostRepositoryFactory $postRepositoryFactory
+        PostRepositoryFactory $postRepositoryFactory
     ) {
         parent::__construct($context);
         $this->postRepositoryFactory = $postRepositoryFactory;
@@ -31,7 +34,7 @@ class Delete extends \Magento\Backend\App\Action
     /**
      * Delete action
      *
-     * @return \Magento\Framework\Controller\Result\Redirect
+     * @return Redirect
      */
     public function execute()
     {
@@ -50,7 +53,7 @@ class Delete extends \Magento\Backend\App\Action
 
                 return $resultRedirect->setPath('*/*/');
 
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $this->messageManager->addErrorMessage($e->getMessage());
 
                 return $resultRedirect->setPath('*/*/edit', ['id' => $id]);
