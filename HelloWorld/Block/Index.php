@@ -40,6 +40,12 @@ class Index extends Template
      */
     public function getDisplayText()
     {
+        $customerId = $this->helper->someMethod();
+
+        if($customerId) {
+            return 'The customer ID is: '.$customerId;
+        }
+
         if($this->helper->getGeneralConfig('enable'))
         {
             return $this->helper->getGeneralConfig('display_text');
